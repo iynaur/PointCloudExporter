@@ -28,3 +28,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Packages/
+Logs/
+ProjectSettings/PresetManager.asset
+ProjectSettings/VFXManager.asset
+ProjectSettings/XRSettings.asset
+ProjectSettings/PackageManagerSettings.asset
