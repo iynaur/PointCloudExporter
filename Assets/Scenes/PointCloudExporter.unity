@@ -435,6 +435,8 @@ MonoBehaviour:
   details: 32
   circleRadius: 32
   shaderBaked: {fileID: 4800000, guid: 86c6d694bff4c2a428445b0d4c2c5642, type: 3}
+  cameraObj: {fileID: 1472670176}
+  myGameObj: {fileID: 1117888320}
 --- !u!4 &1117888322
 Transform:
   m_ObjectHideFlags: 0
