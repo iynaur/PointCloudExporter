@@ -34,3 +34,5 @@ ProjectSettings/PresetManager.asset
 ProjectSettings/VFXManager.asset
 ProjectSettings/XRSettings.asset
 ProjectSettings/PackageManagerSettings.asset
+ProjectSettings/ProjectVersion.txt
+.vs/
