@@ -109,7 +109,7 @@ namespace PointCloudExporter
 
 		public MeshInfos LoadPointCloud ()
 		{
-			string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName) + ".ply";
+			string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName) + ".pcd";
 			return SimpleImporter.Instance.Load(filePath, maximumVertices);
 		}
 
