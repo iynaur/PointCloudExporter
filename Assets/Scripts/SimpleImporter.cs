@@ -75,7 +75,8 @@ namespace PointCloudExporter
 			string input = new string(ans);
 			var jss = new JavaScriptSerializer();
 
-            {
+			/*
+            if (false){
 				string input2 = "[{error: \"Account with that email exists\"}]";
 				var jss2 = new JavaScriptSerializer();
 
@@ -87,6 +88,7 @@ namespace PointCloudExporter
 				dynamic d2 = jss2.DeserializeObject(input2);
 				Console.WriteLine(d2[0]["error"]);
 			}
+			*/
 
 			var array = jss.Deserialize<object[]>(input);
 			var dict = array[0] as Dictionary<string, object>;
@@ -104,9 +106,10 @@ namespace PointCloudExporter
 			for (int i = 0; i< array.Length; ++i)
             {
 				dynamic jp = d[i];
-				float x = (float)jp["x"];
-				float y = (float)jp["y"];
-				float z = (float)jp["z"];
+				decimal dx = jp["x"];
+				float x = Convert.ToSingle(dx);
+				float y = Convert.ToSingle(jp["y"]);
+				float z = Convert.ToSingle(jp["z"]);
 				data.vertices[i] = new Vector3(x, y, z);
 
 			}
