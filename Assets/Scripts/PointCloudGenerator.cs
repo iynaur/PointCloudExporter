@@ -63,11 +63,11 @@ namespace PointCloudExporter
 				var t2 = myGameObj.transform;
 				//cameraObj.transform.position += myGameObj.transform.position - cameraObj.transform.position;
 				cameraObj.transform.RotateAround(myGameObj.transform.position,
-												Vector3.up,
+												cameraObj.transform.up,
 												-Input.GetAxis("Mouse X") * speed);
 
 				cameraObj.transform.RotateAround(myGameObj.transform.position,
-												Vector3.right,
+												cameraObj.transform.right,
 												-Input.GetAxis("Mouse Y") * speed);
 			}
 
