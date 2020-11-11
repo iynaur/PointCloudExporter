@@ -120,17 +120,10 @@ namespace PointCloudExporter
 				Console.WriteLine(d2[0]["error"]);
 			}
 			*/
-
+			jss.MaxJsonLength = 256000000;
 			var array = jss.Deserialize<object[]>(input);
 			{
 				TextWriter sw = new StreamWriter("after Deserialize.txt");
-				sw.Close();
-			}
-
-			// More short with dynamic
-			dynamic d = jss.DeserializeObject(input);
-			{
-				TextWriter sw = new StreamWriter("after DeserializeObject.txt");
 				sw.Close();
 			}
 
