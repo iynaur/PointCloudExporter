@@ -32,7 +32,7 @@ namespace PointCloudExporter
 		public Shader shaderBaked;
 
 		private MeshInfos points;
-		private const int verticesMax = 64998;
+		private const int verticesMax = 65535;
 		private Material material;
 		private Material materialBaked;
 		private Mesh[] meshArray;
