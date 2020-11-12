@@ -48,6 +48,11 @@ namespace PointCloudExporter
 		private Vector3 GetBaseInput()
 		{ //returns the basic values, if it's 0 than it's not active.
 			Vector3 p_Velocity = new Vector3();
+			if (Input.mouseScrollDelta.y != 0)
+			{
+				int iy = Mathf.FloorToInt(Input.mouseScrollDelta.y * 50);
+				p_Velocity += new Vector3(0, 0, iy);
+			}
 			if (Input.GetKey(KeyCode.W))
 			{
 				p_Velocity += new Vector3(0, 0, 1);
