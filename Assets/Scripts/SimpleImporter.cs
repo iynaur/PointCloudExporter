@@ -16,7 +16,8 @@ using System.Web.Script.Serialization;
 using System.Web;
 using UnityEngine.UIElements;
 using System.Data.Common;
-//using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace PointCloudExporter
 {
@@ -55,7 +56,7 @@ namespace PointCloudExporter
 			}
 		}
 
-		[DllImport("C:\\Users\\admin\\poly2tri\\out\\build\\x64-Debug\\pcdReader.dll", EntryPoint = "readPCD", CharSet = CharSet.Ansi)]
+		[DllImport("C:\\Users\\admin\\poly2tri\\out\\build\\x64-Release\\pcdReader.dll", EntryPoint = "readPCD", CharSet = CharSet.Ansi)]
 		public static extern int readPCD(IntPtr p, int seglen, ref IntPtr index);
 
 		public MeshInfos Load (string filePath, int maximumVertex = 65000)
@@ -81,60 +82,30 @@ namespace PointCloudExporter
 			Marshal.Copy(filec, 0, buffer, flen);
 
 			IntPtr ansp = new IntPtr(0);
-			{
-				TextWriter sw = new StreamWriter("before readPCD.txt");
-				sw.Close();
-			}
+			Debug.Log("readPCD");
 			int anslen = readPCD(buffer, filePath.Length, ref ansp);
-			{
-				TextWriter sw = new StreamWriter("after readPCD.txt");
-				sw.Close();
-			}
+			Debug.Log("after readPCD.txt");
 			char[] ans = new char[anslen];
 			Marshal.Copy(ansp, ans, 0, anslen);
 
 
 			string input = new string(ans);
 
-			{
-				TextWriter sw = new StreamWriter("before_JavaScriptSerializer.txt");
-				sw.Close();
-			}
-			var jss = new JavaScriptSerializer();
-			{
-				TextWriter sw = new StreamWriter("after_JavaScriptSerializer.txt");
-				sw.Close();
-			}
+			//object va = JsonConvert.DeserializeObject(input);
+			JArray receivedObject = JArray.Parse(input);
+			//dynamic receivedObject2 = JObject.Parse(input);
 
-			/*
-            if (false){
-				string input2 = "[{error: \"Account with that email exists\"}]";
-				var jss2 = new JavaScriptSerializer();
-
-				var array2 = jss2.Deserialize<Dictionary<string, object>[]>(input2);
-				var dict2 = array2[0] as Dictionary<string, object>;
-				Console.WriteLine(dict2["error"]);
-
-				// More short with dynamic
-				dynamic d2 = jss2.DeserializeObject(input2);
-				Console.WriteLine(d2[0]["error"]);
-			}
-			*/
-			jss.MaxJsonLength = 256000000;
-			var array = jss.Deserialize<object[]>(input);
-			{
-				TextWriter sw = new StreamWriter("after Deserialize.txt");
-				sw.Close();
-			}
+			//var list = receivedObject.Count
+			Debug.Log("after Deserialize.txt");
 
 			MeshInfos data = new MeshInfos();
-			data.vertexCount = array.Length;
+			data.vertexCount = receivedObject.Count;
 			data.vertices = new Vector3[data.vertexCount];
 			data.normals = new Vector3[data.vertexCount];
 			data.colors = new Color[data.vertexCount];
-			for (int i = 0; i< array.Length; ++i)
+			for (int i = 0; i< receivedObject.Count; ++i)
             {
-				Dictionary<string, object> jp = array[i] as Dictionary<string, object>;
+				Dictionary<string, object> jp = receivedObject[i].ToObject<Dictionary<string, object>>();
 				//decimal dx = jp["x"];
 				float x = Convert.ToSingle(jp["x"]);
 				float y = Convert.ToSingle(jp["y"]);
@@ -142,7 +113,7 @@ namespace PointCloudExporter
 				data.vertices[i] = new Vector3(x, y, z);
 
 			}
-			
+			Debug.Log("after MeshInfos.txt");
 			return data;
 		}
 	}
