@@ -53,6 +53,10 @@ namespace PointCloudExporter
 				int iy = Mathf.FloorToInt(Input.mouseScrollDelta.y * 50);
 				p_Velocity += new Vector3(0, 0, iy);
 			}
+			if (Input.GetMouseButton(1))
+            {
+				p_Velocity += new Vector3(-Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"), 0) * 50;
+			}
 			if (Input.GetKey(KeyCode.W))
 			{
 				p_Velocity += new Vector3(0, 1, 0);
