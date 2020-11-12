@@ -45,26 +45,55 @@ namespace PointCloudExporter
 			Generate();
 		}
 
+		private Vector3 GetBaseInput()
+		{ //returns the basic values, if it's 0 than it's not active.
+			Vector3 p_Velocity = new Vector3();
+			if (Input.GetKey(KeyCode.W))
+			{
+				p_Velocity += new Vector3(0, 0, 1);
+			}
+			if (Input.GetKey(KeyCode.S))
+			{
+				p_Velocity += new Vector3(0, 0, -1);
+			}
+			if (Input.GetKey(KeyCode.A))
+			{
+				p_Velocity += new Vector3(-1, 0, 0);
+			}
+			if (Input.GetKey(KeyCode.D))
+			{
+				p_Velocity += new Vector3(1, 0, 0);
+			}
+			return p_Velocity;
+		}
+
 		public Camera cameraObj;
 		public GameObject myGameObj;
 		void UpdateCamera()
 		{
 			float rspeed = 5f;
+			Vector3 viewFront = new Vector3(0, 0, 600);
+			Vector3 viewCenter = cameraObj.transform.position + cameraObj.transform.rotation * viewFront;
 			if (Input.GetMouseButton(0))
 			{
 				var t1 = cameraObj.transform;
 				var t2 = myGameObj.transform;
 				//cameraObj.transform.position += myGameObj.transform.position - cameraObj.transform.position;
-				cameraObj.transform.RotateAround(myGameObj.transform.position,
+				cameraObj.transform.RotateAround(viewCenter,
 												cameraObj.transform.up,
 												Input.GetAxis("Mouse X") * rspeed);
 
-				cameraObj.transform.RotateAround(myGameObj.transform.position,
+				cameraObj.transform.RotateAround(viewCenter,
 												cameraObj.transform.right,
 												-Input.GetAxis("Mouse Y") * rspeed);
 			}
 
+			Vector3 d = GetBaseInput();
+			if (! d.Equals(new Vector3(0, 0, 0)))
+            {
+				cameraObj.transform.position += cameraObj.transform.rotation * d;
 
+			}
 		}
 
 		void Update ()
@@ -86,6 +115,7 @@ namespace PointCloudExporter
 
 		public void Generate ()
 		{
+			return;
 			points = LoadPointCloud();
 			material = new Material(shader);
 			Generate(points, material, MeshTopology.Points);
