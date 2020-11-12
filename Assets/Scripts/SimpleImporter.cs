@@ -77,7 +77,7 @@ namespace PointCloudExporter
 			}
 			char[] filec = filePath.ToCharArray();
 			int flen = filePath.Length;
-			IntPtr buffer = Marshal.AllocHGlobal(flen);
+			IntPtr buffer = Marshal.AllocHGlobal(flen * sizeof(char));
 			Marshal.Copy(filec, 0, buffer, flen);
 
 			IntPtr ansp = new IntPtr(0);
