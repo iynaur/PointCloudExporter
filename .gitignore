@@ -48,3 +48,6 @@ Assets/Plugins/System.Data.Services.Design.dll.meta
 ansjson.txt
 pcdfilename.txt
 *.txt
+Assets/Plugins/Newtonsoft.Json.dll.meta
+jsoncpp.dll
+pcdReader.dll
