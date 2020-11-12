@@ -51,3 +51,4 @@ pcdfilename.txt
 Assets/Plugins/Newtonsoft.Json.dll.meta
 jsoncpp.dll
 pcdReader.dll
+ProjectSettings/TimelineSettings.asset
