@@ -45,13 +45,6 @@ namespace PointCloudExporter
 			Generate();
 		}
 
-		float mainSpeed = 100.0f; //regular speed
-		float shiftAdd = 250.0f; //multiplied by how long shift is held.  Basically running
-		float maxShift = 1000.0f; //Maximum speed when holdin gshift
-		float camSens = 0.25f; //How sensitive it with mouse
-		private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
-		private float totalRun = 1.0f;
-
 		public Camera cameraObj;
 		public GameObject myGameObj;
 		void UpdateCamera()
@@ -64,36 +57,14 @@ namespace PointCloudExporter
 				//cameraObj.transform.position += myGameObj.transform.position - cameraObj.transform.position;
 				cameraObj.transform.RotateAround(myGameObj.transform.position,
 												cameraObj.transform.up,
-												-Input.GetAxis("Mouse X") * speed);
+												-Input.GetAxis("Mouse X") * rspeed);
 
 				cameraObj.transform.RotateAround(myGameObj.transform.position,
 												cameraObj.transform.right,
-												-Input.GetAxis("Mouse Y") * speed);
+												-Input.GetAxis("Mouse Y") * rspeed);
 			}
 
 
-		}
-
-		private Vector3 GetBaseInput()
-		{ //returns the basic values, if it's 0 than it's not active.
-			Vector3 p_Velocity = new Vector3();
-			if (Input.GetKey(KeyCode.W))
-			{
-				p_Velocity += new Vector3(0, 0, 1);
-			}
-			if (Input.GetKey(KeyCode.S))
-			{
-				p_Velocity += new Vector3(0, 0, -1);
-			}
-			if (Input.GetKey(KeyCode.A))
-			{
-				p_Velocity += new Vector3(-1, 0, 0);
-			}
-			if (Input.GetKey(KeyCode.D))
-			{
-				p_Velocity += new Vector3(1, 0, 0);
-			}
-			return p_Velocity;
 		}
 
 		void Update ()
