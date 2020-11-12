@@ -55,11 +55,11 @@ namespace PointCloudExporter
 			}
 			if (Input.GetKey(KeyCode.W))
 			{
-				p_Velocity += new Vector3(0, 0, 1);
+				p_Velocity += new Vector3(0, 1, 0);
 			}
 			if (Input.GetKey(KeyCode.S))
 			{
-				p_Velocity += new Vector3(0, 0, -1);
+				p_Velocity += new Vector3(0, -1, 0);
 			}
 			if (Input.GetKey(KeyCode.A))
 			{
