@@ -49,7 +49,7 @@ namespace PointCloudExporter
 		public GameObject myGameObj;
 		void UpdateCamera()
 		{
-			float rspeed = 2f;
+			float rspeed = 5f;
 			if (Input.GetMouseButton(0))
 			{
 				var t1 = cameraObj.transform;
@@ -57,7 +57,7 @@ namespace PointCloudExporter
 				//cameraObj.transform.position += myGameObj.transform.position - cameraObj.transform.position;
 				cameraObj.transform.RotateAround(myGameObj.transform.position,
 												cameraObj.transform.up,
-												-Input.GetAxis("Mouse X") * rspeed);
+												Input.GetAxis("Mouse X") * rspeed);
 
 				cameraObj.transform.RotateAround(myGameObj.transform.position,
 												cameraObj.transform.right,
