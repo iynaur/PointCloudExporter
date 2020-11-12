@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PointCloudExporter.unity
+    guid: 2f57ce01e6cd0f2439390da68bddd920
   m_configObjects: {}
